@@ -1,0 +1,94 @@
+[
+  {
+    "version": "v2026.11.17.01",
+    "date": "2026-11-17",
+    "changes": [
+      "🖼️ Ryciny w Strefie Wiedzy PRO: 184 ryciny z materiałów w swoim miejscu w tekście, z podpisem i powiększeniem. Nowe „Ćwiczenia z rycin”: co przedstawia rycina, odpowiedzi A–D, powtórka błędnych i „Doczytaj”."
+    ]
+  },
+  {
+    "version": "v2026.11.16.02",
+    "date": "2026-11-16",
+    "changes": [
+      "🎧 Audiobook w Strefie Wiedzy PRO: wszystkie materiały nagrane głosem lektorki (ok. 9,5 h). Gra przy zgaszonym ekranie i wyciszonym dzwonku, sterowanie na ekranie blokady, ±15 s, tempo, wyłącznik czasowy, karta „Słuchasz”. Nagranie pobiera się na bieżąco, nie zajmuje miejsca w telefonie."
+    ]
+  },
+  {
+    "version": "v2026.11.16.01",
+    "date": "2026-11-16",
+    "changes": [
+      "🔧 Czytnik Strefy Wiedzy nie przeskakuje już akapitów i stron po cofnięciu albo stuknięciu w akapit w trakcie czytania."
+    ]
+  },
+  {
+    "version": "v2026.11.15.08",
+    "date": "2026-11-15",
+    "changes": [
+      "📚 Strefa Wiedzy PRO: materiały do nauki czytane przez lektora, z przyciskiem „Doczytaj w Strefie Wiedzy” przy pytaniach. Czytnik zatrzymuje się, gdy lektor nie może czytać."
+    ]
+  },
+  {
+    "version": "v2026.11.15.07",
+    "date": "2026-11-15",
+    "changes": [
+      "📚 Strefa Wiedzy PRO: materiały do nauki czytane przez lektora, dostępne z kodem PRO, oraz przycisk „Doczytaj w Strefie Wiedzy” przy pytaniach."
+    ]
+  },
+  {
+    "version": "v2026.11.15.06",
+    "date": "2026-11-15",
+    "changes": [
+      "📚 Strefa Wiedzy PRO: materiały do nauki czytane przez lektora, dostępne z kodem PRO. Przy pytaniach w nauce i w przeglądzie egzaminu przycisk „Doczytaj w Strefie Wiedzy”."
+    ]
+  },
+  {
+    "version": "v2026.11.15.05",
+    "date": "2026-11-15",
+    "changes": [
+      "🎙️ Komendy głosowe „uzasadnij” i „zakończ”, okno z podpowiedzią o sterowaniu głosem przed nauką i egzaminem oraz równy pasek przycisków na ekranie pytania."
+    ]
+  },
+  {
+    "version": "v2026.11.15.04",
+    "date": "2026-11-15",
+    "changes": [
+      "💡 W Opcjach jest podpowiedź, co zrobić, gdy lektor czyta, ale nic nie słychać (tryb cichy iPhone'a)."
+    ]
+  },
+  {
+    "version": "v2026.11.15.03",
+    "date": "2026-11-15",
+    "changes": [
+      "🔊 Lektor i odsłuch odpowiedzi działają teraz tak samo jak w OWI SSI: czytanie bez zmiany trybu dźwięku i jedno stałe nasłuchiwanie, które nie zawiesza się po kilku odpowiedziach."
+    ]
+  },
+  {
+    "version": "v2026.11.15.02",
+    "date": "2026-11-15",
+    "changes": [
+      "🎙️ Aplikacja rozumie litery tak, jak zapisuje je iPhone (np. „Ą” jako A). Ikony na ekranie pytania mają podpisy, a w Opcjach jest dziennik błędów do skopiowania."
+    ]
+  },
+  {
+    "version": "v2026.11.15.01",
+    "date": "2026-11-15",
+    "changes": [
+      "🎙️ Na ekranie pytania są przyciski „Lektor” i „Mikrofon”, a w Opcjach „Sprawdź lektora” i „Sprawdź mikrofon”. Wybór przedmiotu jest też na ekranie nauki."
+    ]
+  },
+  {
+    "version": "v2026.11.14.01",
+    "date": "2026-11-14",
+    "changes": [
+      "🔊 Lektor czyta pytania także przy włączonym trybie cichym iPhone'a, a odpowiedzi głosem są od razu włączone. Ikona i nazwa „Uki's PT Trainer” na ekranie początkowym."
+    ]
+  },
+  {
+    "version": "v2026.11.13.01",
+    "date": "2026-11-13",
+    "changes": [
+      "✨ Nauka do egzaminów REPs Polska: trener personalny oraz anatomia i fizjologia, z lektorem, odpowiedziami głosem, powtórkami błędów, fiszkami i egzaminem próbnym 72 pytań.",
+      "🎯 Wskaźnik gotowości, dzienna porcja pytań i data egzaminu pomagają rozłożyć naukę i sprawdzić, czy jesteś gotowy."
+    ]
+  }
+]

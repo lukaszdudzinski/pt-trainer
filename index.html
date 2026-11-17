@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="pl" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#18212c">
+  <meta name="description" content="Nauka do egzaminów REPs Polska: trener personalny oraz anatomia i fizjologia.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Uki's PT Trainer">
+  <title>Uki's PT Trainer</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="icon" href="icons/icon-512.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-screen="screenHome">
+  <header class="topbar">
+    <button id="btnBack" class="icon-btn glass" data-icon="back" aria-label="Wróć" hidden></button>
+    <img class="logo" src="icons/icon-192.png" alt="Uki's PT Trainer" width="64" height="64">
+    <span class="topbar-side"></span>
+  </header>
+
+  <main>
+    <!-- Start -->
+    <section class="screen active" id="screenHome" aria-label="Start">
+      <div class="subject-switch" id="subjectSwitch" role="group" aria-label="Przedmiot">
+        <button type="button" data-subject="trener" aria-pressed="true">Trener personalny</button>
+        <button type="button" data-subject="anatomia" aria-pressed="false" aria-label="Anatomia i fizjologia">Anatomia</button>
+      </div>
+      <p id="homeMessage" class="card" role="status" hidden></p>
+      <section class="card ready-card" id="readyCard" aria-label="Gotowość"></section>
+      <button id="btnDaily" class="btn-hero" type="button">
+        <span data-icon="target" data-icon-size="26"></span>
+        <span class="hero-text">Dzisiejsza porcja<small id="dailySub">powtórki i nowe pytania</small></span>
+        <span data-icon="chevron" data-icon-size="22"></span>
+      </button>
+      <div class="tiles">
+        <button id="btnLearn" class="tile" type="button"><span class="tile-icon" data-icon="book" data-icon-size="26"></span>Nauka</button>
+        <button id="btnReview" class="tile" type="button"><span class="tile-icon" data-icon="repeat" data-icon-size="26"></span>Powtórki błędów<span class="badge" id="reviewCount">0</span></button>
+        <button id="btnFlashcards" class="tile" type="button"><span class="tile-icon" data-icon="layers" data-icon-size="26"></span>Fiszki</button>
+        <button id="btnExam" class="tile" type="button"><span class="tile-icon" data-icon="timer" data-icon-size="26"></span>Egzamin próbny</button>
+      </div>
+      <button id="btnKnowledge" class="btn-wide" type="button">
+        <span class="tile-icon" data-icon="book" data-icon-size="26"></span>
+        <span class="hero-text">Strefa Wiedzy PRO<small id="knowledgeSub">Materiały czytane przez lektora</small></span>
+        <span data-icon="chevron" data-icon-size="22"></span>
+      </button>
+      <p class="footer-note">Aplikacja do nauki przed egzaminem · <span id="appVersion">v2026.11.17.01</span></p>
+    </section>
+
+    <!-- Wybór zakresu nauki i fiszek -->
+    <section class="screen" id="screenLearnSetup" aria-label="Wybór działu">
+      <h1 class="screen-title" id="learnSetupTitle">Nauka</h1>
+      <div class="subject-switch" id="setupSubject" role="group" aria-label="Przedmiot">
+        <button type="button" data-subject="trener" aria-pressed="true">Trener personalny</button>
+        <button type="button" data-subject="anatomia" aria-pressed="false" aria-label="Anatomia i fizjologia">Anatomia</button>
+      </div>
+      <div class="card">
+        <label class="field">Zakres
+          <select id="sectionSelect"></select>
+        </label>
+      </div>
+      <button id="btnStartLearn" class="btn btn-primary" data-icon="play">Zacznij</button>
+    </section>
+
+    <!-- Pytanie (nauka, porcja, powtórki) -->
+    <section class="screen" id="screenQuiz" aria-label="Pytanie">
+      <div class="progress-head">
+        <div class="progress-row"><span id="qSection"></span><span id="quizProgress"></span></div>
+        <div class="bar"><span id="quizBar"></span></div>
+      </div>
+      <div class="toolbar" style="--n:6">
+        <button type="button" id="chipTts" class="tool-btn" data-chip="tts" data-icon="volume" data-icon-size="20" aria-pressed="true"><span class="tool-label">Lektor</span></button>
+        <button type="button" id="chipStt" class="tool-btn" data-chip="stt" data-icon="mic" data-icon-size="20" aria-pressed="true"><span class="tool-label">Mikrofon</span></button>
+        <button type="button" id="btnRepeat" class="tool-btn" data-icon="repeat" data-icon-size="20"><span class="tool-label">Powtórz</span></button>
+        <button type="button" id="btnStar" class="tool-btn" data-icon="star" data-icon-size="20" aria-pressed="false"><span class="tool-label">Trudne</span></button>
+        <button type="button" id="btnDoubtful" class="tool-btn" data-icon="flag" data-icon-size="20" aria-pressed="false"><span class="tool-label">Wątpliwe</span></button>
+        <button type="button" id="btnQuit" class="tool-btn" data-icon="close" data-icon-size="20"><span class="tool-label">Zakończ</span></button>
+      </div>
+      <div id="quizBody">
+        <h2 id="qText" class="question"></h2>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback" hidden>
+          <p id="feedbackText"></p>
+          <p id="explanation"></p>
+          <button id="btnReadMore" class="btn btn-small read-more-btn" type="button" data-icon="book" hidden>Doczytaj w Strefie Wiedzy</button>
+        </div>
+        <button id="btnNext" class="btn btn-primary" hidden>Dalej</button>
+      </div>
+      <div id="sessionSummary" class="card" hidden></div>
+    </section>
+
+    <!-- Fiszki -->
+    <section class="screen" id="screenFlash" aria-label="Fiszki">
+      <div class="progress-head">
+        <div class="progress-row"><span>Fiszki</span><span id="flashProgress"></span></div>
+      </div>
+      <div class="toolbar" style="--n:4">
+        <button type="button" class="tool-btn" data-chip="tts" data-icon="volume" data-icon-size="20" aria-pressed="true"><span class="tool-label">Lektor</span></button>
+        <button type="button" class="tool-btn" data-chip="stt" data-icon="mic" data-icon-size="20" aria-pressed="true"><span class="tool-label">Mikrofon</span></button>
+        <button type="button" id="btnFlashRepeat" class="tool-btn" data-icon="repeat" data-icon-size="20"><span class="tool-label">Powtórz</span></button>
+        <button type="button" id="btnFlashQuit" class="tool-btn" data-icon="close" data-icon-size="20"><span class="tool-label">Zakończ</span></button>
+      </div>
+      <div class="flashcard card">
+        <div id="flashFront"></div>
+        <div id="flashBack" hidden></div>
+      </div>
+      <div class="row">
+        <button id="btnFlip" class="btn" data-icon="rotate">Odwróć</button>
+      </div>
+      <div class="row">
+        <button id="btnDontKnow" class="btn btn-wrong">Nie znam</button>
+        <button id="btnKnow" class="btn btn-right">Znam</button>
+      </div>
+      <button id="btnFlashNext" class="btn btn-primary" hidden>Dalej</button>
+      <div id="flashSummary" class="card" hidden></div>
+    </section>
+
+    <!-- Egzamin: przygotowanie -->
+    <section class="screen" id="screenExamSetup" aria-label="Egzamin próbny">
+      <h1 class="screen-title">Egzamin próbny</h1>
+      <div class="card">
+        <p id="examInfo"></p>
+        <label class="switch-row"><span>Jak prawdziwy: bez lektora i głosu, bez pauzy</span><input type="checkbox" id="realModeToggle"></label>
+      </div>
+      <button id="btnStartExam" class="btn btn-primary" data-icon="timer">Rozpocznij egzamin</button>
+    </section>
+
+    <!-- Egzamin -->
+    <section class="screen" id="screenExam" aria-label="Egzamin">
+      <div class="progress-head">
+        <div class="progress-row"><span id="examSection"></span><span id="examCounter"></span></div>
+        <div class="bar"><span id="examBar"></span></div>
+      </div>
+      <div class="exam-timer-row"><span class="exam-timer" id="examTimer">60:00</span></div>
+      <div class="toolbar" id="examToolbar" style="--n:4">
+        <button type="button" class="tool-btn" data-chip="tts" data-icon="volume" data-icon-size="20" aria-pressed="true"><span class="tool-label">Lektor</span></button>
+        <button type="button" class="tool-btn" data-chip="stt" data-icon="mic" data-icon-size="20" aria-pressed="true"><span class="tool-label">Mikrofon</span></button>
+        <button type="button" id="btnExamRepeat" class="tool-btn" data-icon="repeat" data-icon-size="20"><span class="tool-label">Powtórz</span></button>
+        <button type="button" id="btnPauseExam" class="tool-btn" data-icon="pause" data-icon-size="20"><span class="tool-label">Pauza</span></button>
+      </div>
+      <h2 id="examQText" class="question"></h2>
+      <div id="examAnswers" class="answers"></div>
+      <div id="examPaused" class="card" hidden><p>Egzamin wstrzymany.</p><button id="btnResumeExam" class="btn btn-primary" data-icon="play">Wznów</button></div>
+      <button id="btnFinishExam" class="btn btn-ghost">Zakończ egzamin</button>
+    </section>
+
+    <!-- Wynik egzaminu -->
+    <section class="screen" id="screenResults" aria-label="Wynik">
+      <p class="eyebrow center" id="resultSubject">Egzamin próbny</p>
+      <div class="card result-card">
+        <div class="ring big">
+          <svg viewBox="0 0 150 150" aria-hidden="true"><circle class="ring-bg" cx="75" cy="75" r="64"></circle><circle class="ring-fg" id="resultRing" cx="75" cy="75" r="64" stroke-dasharray="0 402"></circle></svg>
+          <div class="ring-label"><strong id="resultPercent"></strong><span id="resultScore"></span></div>
+        </div>
+        <p id="resultVerdict" class="verdict"></p>
+        <p id="resultTime" class="muted"></p>
+        <p id="resultShortfall" class="muted" hidden></p>
+      </div>
+      <h3 class="eyebrow">Wynik w działach</h3>
+      <ul id="resultSections" class="bars"></ul>
+      <h3 class="eyebrow">Przegląd błędów</h3>
+      <ul id="resultMistakes" class="mistakes"></ul>
+      <div class="row">
+        <button id="btnResultsHome" class="btn">Start</button>
+        <button id="btnResultsReview" class="btn btn-primary">Powtórz błędy</button>
+      </div>
+    </section>
+
+    <!-- Statystyki -->
+    <section class="screen" id="screenStats" aria-label="Wyniki">
+      <h1 class="screen-title" id="statsTitle">Wyniki</h1>
+      <div class="card">
+        <p id="readyBadge" class="ready-badge"></p>
+        <p>Opanowane pytania: <strong id="masteredPct">0%</strong></p>
+        <p>Dzisiaj: <strong id="dailyGoal">0 / 20</strong> · Seria dni: <strong id="streakDays">0</strong></p>
+      </div>
+      <div class="card">
+        <label class="field">Data egzaminu <input type="date" id="examDateInput"></label>
+        <p>Do egzaminu: <strong id="daysLeft">—</strong></p>
+      </div>
+      <h3 class="eyebrow">Poziom wiedzy w działach</h3>
+      <ul id="sectionStats" class="bars"></ul>
+      <p id="weakSections" class="muted"></p>
+      <h3 class="eyebrow">Egzaminy próbne</h3>
+      <ul id="examHistory" class="plain-list"></ul>
+      <h3 class="eyebrow">Pytania z gwiazdką</h3>
+      <ul id="starList" class="plain-list"></ul>
+      <h3 class="eyebrow">Wątpliwe pytania</h3>
+      <ul id="doubtfulList" class="plain-list"></ul>
+      <button id="btnCopyDoubtful" class="btn" data-icon="copy"><span class="label">Kopiuj listę</span></button>
+      <button id="btnClearSubject" class="btn btn-danger" data-icon="trash">Wyczyść postęp przedmiotu</button>
+    </section>
+
+    <!-- Strefa Wiedzy PRO -->
+    <section class="screen" id="screenKnowledge" aria-label="Strefa Wiedzy PRO">
+      <h1 class="screen-title">Strefa Wiedzy PRO</h1>
+      <div id="proLocked" class="card">
+        <p>Materiały do nauki, czytane przez lektora, są dostępne z kodem PRO.</p>
+        <label class="field">Kod PRO
+          <input id="proCode" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="PT-XXXX-XXXX">
+        </label>
+        <button id="btnUnlock" class="btn btn-primary" type="button">Odblokuj</button>
+        <p id="proMessage" class="muted" role="status"></p>
+      </div>
+      <div id="proUnlocked" hidden>
+        <button type="button" id="btnContinue" class="ab-continue" hidden>
+          <span class="ab-continue-text"><span class="eyebrow">Słuchasz</span><strong id="continueTitle"></strong><small id="continueSub"></small></span>
+          <span class="ab-continue-play" data-icon="play" data-icon-size="24"></span>
+        </button>
+        <button type="button" id="btnFigExercises" class="fig-entry"><span data-icon="layers" data-icon-size="22"></span><span>Ćwiczenia z rycin<small>Co przedstawia rycina? Odpowiedzi A–D</small></span></button>
+        <ul id="materialList" class="material-list"></ul>
+      </div>
+    </section>
+
+    <!-- Czytnik -->
+    <section class="screen" id="screenReader" aria-label="Czytnik">
+      <h1 class="screen-title reader-title" id="readerTitle"></h1>
+      <label class="field reader-page">Strona <select id="readerPage"></select></label>
+      <div class="toolbar" id="ttsControls" style="--n:3">
+        <button type="button" id="btnPrevPara" class="tool-btn" data-icon="back" data-icon-size="20"><span class="tool-label">Wstecz</span></button>
+        <button type="button" id="btnReadToggle" class="tool-btn" data-icon="play" data-icon-size="20" aria-pressed="false"><span class="tool-label">Czytaj</span></button>
+        <button type="button" id="btnNextPara" class="tool-btn" data-icon="chevron" data-icon-size="20"><span class="tool-label">Dalej</span></button>
+      </div>
+      <p id="readerMessage" class="card" role="status" hidden></p>
+      <div id="readerText" class="reader-text"></div>
+      <div id="audioPlayer" class="ab-player" hidden>
+        <input type="range" id="abSeek" min="0" max="1000" value="0" aria-label="Postęp nagrania">
+        <div class="ab-times"><span id="abElapsed">0:00</span><span id="abRemain">−0:00</span></div>
+        <div class="ab-controls">
+          <button type="button" id="abPrevPage" class="ab-btn" aria-label="Poprzednia strona" data-icon="skipBack" data-icon-size="26"></button>
+          <button type="button" id="abBack" class="ab-btn ab-skip" aria-label="15 sekund wstecz" data-icon="rotate" data-icon-size="22"><span>15</span></button>
+          <button type="button" id="abPlay" class="ab-play" aria-label="Słuchaj" aria-pressed="false" data-icon="play" data-icon-size="32"></button>
+          <button type="button" id="abFwd" class="ab-btn ab-skip" aria-label="15 sekund dalej" data-icon="rotateCw" data-icon-size="22"><span>15</span></button>
+          <button type="button" id="abNextPage" class="ab-btn" aria-label="Następna strona" data-icon="skipFwd" data-icon-size="26"></button>
+        </div>
+        <div class="ab-chips">
+          <button type="button" id="abRate" class="ab-chip">Tempo 1×</button>
+          <button type="button" id="abSleep" class="ab-chip" aria-pressed="false">Wyłącznik: nie</button>
+        </div>
+        <p class="ab-note">Gra przy zgaszonym ekranie i wyciszonym dzwonku. Sterowanie także na ekranie blokady.</p>
+        <audio id="abAudio" preload="auto" playsinline></audio>
+      </div>
+    </section>
+
+    <!-- Ćwiczenia z rycin -->
+    <section class="screen" id="screenFigQuiz" aria-label="Ćwiczenia z rycin">
+      <h1 class="screen-title">Ćwiczenia z rycin</h1>
+      <div id="figSetup">
+        <label class="field">Materiał <select id="figMaterial"></select></label>
+        <p id="figSetupInfo" class="muted" role="status"></p>
+        <div class="fig-setup-actions">
+          <button type="button" id="btnFigStart" class="btn btn-primary">Zacznij: 10 rycin</button>
+          <button type="button" id="btnFigWrong" class="btn" hidden></button>
+        </div>
+      </div>
+      <div id="figQuestion" hidden>
+        <p id="figProgress" class="muted"></p>
+        <button type="button" id="figImageBtn" class="fig-quiz-image" aria-label="Powiększ rycinę"><img id="figImage" alt="Rycina do rozpoznania"></button>
+        <h2 class="fig-quiz-q">Co przedstawia rycina?</h2>
+        <div id="figAnswers" class="answers"></div>
+        <div id="figFeedback" class="feedback" hidden>
+          <p id="figFeedbackText"></p>
+          <p id="figFeedbackSource" class="muted"></p>
+          <div class="row">
+            <button type="button" id="btnFigReadMore" class="btn">Doczytaj w Strefie Wiedzy</button>
+            <button type="button" id="btnFigNext" class="btn btn-primary">Dalej</button>
+          </div>
+        </div>
+      </div>
+      <div id="figResult" class="card" hidden>
+        <p id="figResultText" class="fig-result"></p>
+        <div class="fig-setup-actions">
+          <button type="button" id="btnFigRepeatWrong" class="btn btn-primary">Powtórz błędne</button>
+          <button type="button" id="btnFigAgain" class="btn">Nowa seria</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ustawienia -->
+    <section class="screen" id="screenSettings" aria-label="Opcje">
+      <h1 class="screen-title">Opcje</h1>
+      <section class="card update-card" id="updateCard" hidden>
+        <p class="update-title"><span data-icon="refresh"></span><span>Dostępna nowa wersja</span></p>
+        <p class="muted">Nowa wersja instaluje się dopiero po Twoim kliknięciu. Twoje odpowiedzi i statystyki zostają.</p>
+        <div class="row">
+          <button id="btnUpdateNotes" class="btn" type="button">Co nowego?</button>
+          <button id="btnUpdateNow" class="btn btn-primary" type="button">Zaktualizuj</button>
+        </div>
+      </section>
+      <h3 class="eyebrow">Lektor i głos</h3>
+      <div class="list">
+        <label class="list-row"><span>Czytaj pytania na głos</span><input type="checkbox" id="setAutoRead"></label>
+        <label class="list-row"><span>Czytaj uzasadnienie odpowiedzi automatycznie</span><input type="checkbox" id="setExplainAloud"></label>
+        <label class="list-row"><span>Odpowiedzi głosem</span><input type="checkbox" id="setStt"></label>
+        <p id="sttInfo" class="list-note">Mów „A”, „B”, „C”, „D”, „E”, „prawda”, „fałsz”, „tak”, „nie”, a także „powtórz” i „dalej”.</p>
+        <label class="list-row"><span>Tryb w aucie: sam czyta, słucha i przechodzi dalej</span><input type="checkbox" id="setCarMode"></label>
+        <label class="list-row column"><span>Szybkość czytania</span><input type="range" id="setRate" min="0.6" max="1.6" step="0.1"></label>
+        <label class="list-row column"><span>Głośność</span><input type="range" id="setVolume" min="0" max="1" step="0.1"></label>
+        <label class="list-row column"><span>Głos</span><select id="setVoice"></select></label>
+        <p id="voiceInfo" class="list-note"></p>
+        <div class="list-row"><span>Podpowiedź o sterowaniu głosem przed nauką i egzaminem</span><button id="btnRestoreTips" class="btn btn-small" type="button">Przywróć</button></div>
+      </div>
+      <h3 class="eyebrow">Kod PRO</h3>
+      <div class="list">
+        <div class="list-row"><span id="proStatus">Strefa Wiedzy PRO: zablokowana</span><button id="btnForgetPro" class="btn btn-small" type="button">Usuń kod</button></div>
+      </div>
+      <h3 class="eyebrow">Sprawdź głos</h3>
+      <div class="card">
+        <p class="muted">Lektor milczy? Najpierw wyłącz tryb cichy w iPhonie (przekreślony dzwonek przy godzinie) i podgłośnij. Jeśli dalej nic, sprawdź tutaj i pokaż wynik Claude.</p>
+        <div class="row">
+          <button id="btnTestTts" class="btn" type="button" data-icon="volume">Sprawdź lektora</button>
+          <button id="btnTestStt" class="btn" type="button" data-icon="mic">Sprawdź mikrofon</button>
+        </div>
+        <p id="voiceDiag" class="diag" aria-live="polite"></p>
+      </div>
+      <h3 class="eyebrow">Dziennik błędów</h3>
+      <div class="card">
+        <ul id="errorList" class="plain-list error-list"></ul>
+        <p id="errorEmpty" class="muted">Brak zapisanych błędów.</p>
+        <div class="row">
+          <button id="btnCopyErrors" class="btn" type="button" data-icon="copy"><span class="label">Kopiuj dziennik</span></button>
+          <button id="btnClearErrors" class="btn btn-ghost" type="button" data-icon="trash">Wyczyść</button>
+        </div>
+      </div>
+      <h3 class="eyebrow">Egzamin próbny</h3>
+      <div class="list">
+        <label class="list-row"><span>Czas egzaminu (minuty)</span><input type="number" id="setExamMinutes" min="30" max="120" step="5" inputmode="numeric"></label>
+      </div>
+      <h3 class="eyebrow">Wygląd</h3>
+      <div class="list">
+        <label class="list-row"><span>Jasny motyw</span><input type="checkbox" id="setTheme"></label>
+      </div>
+      <p class="muted version-line">Wersja <span id="settingsVersion"></span> · <button id="changelogLink" class="link-btn" type="button">Zobacz co nowego</button></p>
+    </section>
+  </main>
+
+  <div id="voiceStatus" class="voice-status" role="status" hidden></div>
+  <div id="saveError" class="toast toast-error" role="alert" hidden>Nie udało się zapisać postępu. Pamięć telefonu dla aplikacji jest pełna.</div>
+
+  <div id="updateToast" class="toast" role="status" hidden>
+    <span class="dot"></span>
+    <span class="toast-text">Dostępna nowa wersja</span>
+    <button id="btnUpdateChangelog" class="link-btn" type="button">Co nowego?</button>
+    <button id="btnUpdate" class="btn btn-primary btn-small" type="button">Zaktualizuj</button>
+  </div>
+
+  <nav class="tabbar" id="tabbar" aria-label="Menu">
+    <button type="button" id="tabHome" data-tab="screenHome"><span data-icon="home" data-icon-size="24"></span>START</button>
+    <button type="button" id="tabLearn" data-tab="screenLearnSetup"><span data-icon="book" data-icon-size="24"></span>NAUKA</button>
+    <button type="button" id="tabExam" data-tab="screenExamSetup"><span data-icon="timer" data-icon-size="24"></span>EGZAMIN</button>
+    <button type="button" id="btnStats" data-tab="screenStats"><span data-icon="chart" data-icon-size="24"></span>WYNIKI</button>
+    <button type="button" id="btnSettings" data-tab="screenSettings"><span data-icon="sliders" data-icon-size="24"></span>OPCJE</button>
+  </nav>
+
+  <div id="changelogModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="changelogTitle" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h2 id="changelogTitle">Co nowego</h2><button id="btnCloseChangelog" class="icon-btn" data-icon="close" aria-label="Zamknij"></button></div>
+      <div id="changelogBody"></div>
+    </div>
+  </div>
+
+  <div id="voiceHelp" class="modal" role="dialog" aria-modal="true" aria-labelledby="voiceHelpTitle" hidden>
+    <div class="modal-box">
+      <h2 id="voiceHelpTitle">Sterowanie głosem</h2>
+      <p class="muted">Lektor czyta, potem słucha, gdy „Mikrofon” jest pomarańczowy.</p>
+      <ul class="help-list">
+        <li><strong>Odpowiedź:</strong> „A”–„E”, „prawda”, „fałsz”, „tak”, „nie”</li>
+        <li><strong>„powtórz”:</strong> przeczytaj jeszcze raz</li>
+        <li><strong>„uzasadnij”:</strong> przeczytaj uzasadnienie</li>
+        <li><strong>„dalej” albo „następne”:</strong> następne pytanie</li>
+        <li><strong>„zakończ”:</strong> wróć na start</li>
+        <li><strong>Fiszki:</strong> „odwróć”, „znam”, „nie znam”</li>
+      </ul>
+      <p class="help-warn">iPhone: wyłącz tryb cichy (przekreślony dzwonek przy godzinie), inaczej lektora nie słychać.</p>
+      <label class="switch-row"><span>Nie pokazuj więcej</span><input type="checkbox" id="voiceHelpHide"></label>
+      <div class="row">
+        <button id="btnVoiceHelpCancel" class="btn" type="button">Anuluj</button>
+        <button id="btnVoiceHelpStart" class="btn btn-primary" type="button">Zaczynam</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="figViewer" class="fig-viewer" role="dialog" aria-modal="true" aria-labelledby="figViewerCaption" hidden>
+    <div class="fig-viewer-bar">
+      <p id="figViewerCaption"></p>
+      <button type="button" id="btnFigZoom" class="btn btn-small" aria-label="Przybliż">1×</button>
+      <button type="button" id="btnFigClose" class="icon-btn" data-icon="close" aria-label="Zamknij"></button>
+    </div>
+    <div class="fig-viewer-body" id="figViewerBody"><img id="figViewerImg" alt=""></div>
+  </div>
+
+  <div id="confirmDialog" class="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-box">
+      <p id="confirmText"></p>
+      <div class="row">
+        <button id="btnConfirmNo" class="btn">Anuluj</button>
+        <button id="btnConfirmYes" class="btn btn-primary">Tak</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

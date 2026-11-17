@@ -1,0 +1,96 @@
+{
+ "v": 1,
+ "keys": [
+  {
+   "salt": "h5OOSILyEP2WJ2+1dX89EA==",
+   "iv": "nNf6/kZBF9WXUUfJ",
+   "wrapped": "esgGf1JAzoTQ3y3QnuacRIx/TWQdnVc02BIjnrSnPa8K2CGS7pRqpjfaDhk5xsNq"
+  }
+ ],
+ "materials": [
+  {
+   "id": "m01",
+   "title": "Podstawy teoretyczne treningu",
+   "pages": 40,
+   "file": "m01.bin",
+   "audioMin": 48
+  },
+  {
+   "id": "m02",
+   "title": "Rodzaje ćwiczeń",
+   "pages": 40,
+   "file": "m02.bin",
+   "audioMin": 48
+  },
+  {
+   "id": "m03",
+   "title": "Ocena zdrowia i sprawności fizycznej",
+   "pages": 21,
+   "file": "m03.bin",
+   "audioMin": 18
+  },
+  {
+   "id": "m04",
+   "title": "Trening funkcjonalny",
+   "pages": 12,
+   "file": "m04.bin",
+   "audioMin": 13
+  },
+  {
+   "id": "m05",
+   "title": "Planowanie treningu",
+   "pages": 12,
+   "file": "m05.bin",
+   "audioMin": 11
+  },
+  {
+   "id": "m06",
+   "title": "Metody treningowe",
+   "pages": 16,
+   "file": "m06.bin",
+   "audioMin": 21
+  },
+  {
+   "id": "m07",
+   "title": "Kontuzje, urazy i przeciążenia",
+   "pages": 18,
+   "file": "m07.bin",
+   "audioMin": 24
+  },
+  {
+   "id": "m08",
+   "title": "Rozciąganie i regeneracja",
+   "pages": 14,
+   "file": "m08.bin",
+   "audioMin": 19
+  },
+  {
+   "id": "m09",
+   "title": "Biomechanika i kinezjologia",
+   "pages": 92,
+   "file": "m09.bin",
+   "audioMin": 125
+  },
+  {
+   "id": "m10",
+   "title": "Biomechanika i stretching",
+   "pages": 31,
+   "file": "m10.bin",
+   "audioMin": 47
+  },
+  {
+   "id": "m11",
+   "title": "Anatomia: układ ruchu",
+   "pages": 142,
+   "file": "m11.bin",
+   "audioMin": 135
+  },
+  {
+   "id": "m12",
+   "title": "Fizjologia wysiłku fizycznego",
+   "pages": 49,
+   "file": "m12.bin",
+   "audioMin": 59
+  }
+ ]
+}
